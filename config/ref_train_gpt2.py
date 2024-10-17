@@ -4,7 +4,7 @@
 
 wandb_log = True
 wandb_project = 'shakespeare-char'
-wandb_run_name='gpt2-124M-ref-nodes1'
+wandb_run_name='1015-ref-gpt2-124M'
 
 # these make the total batch size be ~0.5M
 # 12 batch size * 1024 block size * 5 gradaccum * 8 GPUs = 491,520

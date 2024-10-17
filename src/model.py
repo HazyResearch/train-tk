@@ -163,6 +163,7 @@ class GPTConfig:
     bias: bool = True # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
     TK_kernel: bool = False # True: use the TK kernel, False: use standard flash attention
     is_train: bool = False
+    causal: bool = True
 
 class GPT(nn.Module):
 
