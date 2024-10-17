@@ -29,7 +29,7 @@ wandb_run_name = 'gpt2' # 'run' + str(time.time())
 dataset = 'openwebtext'
 gradient_accumulation_steps = 5 * 8 # used to simulate larger batch sizes
 batch_size = 12 # if gradient_accumulation_steps > 1, this is the micro-batch size
-block_size = 1024
+block_size = 1024   # seqlen
 # model
 causal = False 
 n_layer = 12
@@ -115,7 +115,6 @@ model_args['TK_kernel'] = TK_kernel
 model_args['causal'] = causal
 model_args['is_train'] = True
 
-
 if meta_vocab_size is None:
     print("defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)")
 model_args['vocab_size'] = meta_vocab_size if meta_vocab_size is not None else 50304
@@ -164,14 +163,11 @@ def get_lr(it):
 if wandb_log and master_process:
     import wandb
     wandb.init(project=wandb_project, name=wandb_run_name, config=config)
-
-# Magic
 # wandb.watch(model, log_freq=100)
 
 # training loop
 X, Y = get_batch('train')
 t0 = time.time()
-local_iter_num = 0 # number of iterations in the lifetime of this process
 running_mfu = -1.0
 
 while True:
@@ -210,19 +206,11 @@ while True:
         break
 
     # forward backward update, with optional gradient accumulation to simulate larger batch size
-    # and using the GradScaler if data type is float16
     for micro_step in range(gradient_accumulation_steps):
         logits, loss = model(X, Y)
         loss = loss / gradient_accumulation_steps # scale the loss to account for gradient accumulation
-        # immediately async prefetch next batch while model is doing the forward pass on the GPU)
         X, Y = get_batch('train')
         loss.backward()
-
-        # log the model weights 
-        if iter_num % log_interval == 0 and master_process:
-            for name, param in model.named_parameters():
-                if param.requires_grad:
-                    wandb.log({name: wandb.Histogram(param.data.cpu().numpy())})
 
     # clip the gradient
     if grad_clip != 0.0:
@@ -238,12 +226,11 @@ while True:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
         lossf = loss.item() * gradient_accumulation_steps
-        if local_iter_num >= 5: # let the training loop settle a bit
+        if iter_num >= 5: # let the training loop settle a bit
             mfu = model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
         print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
     iter_num += 1
-    local_iter_num += 1
 
     # termination conditions
     if iter_num > max_iters:

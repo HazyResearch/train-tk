@@ -14,8 +14,6 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-
-import thunderkittens as tk
 from src.custom_model import CustomAttention
 
 class LayerNorm(nn.Module):
@@ -74,35 +72,9 @@ class CausalSelfAttention(nn.Module):
         
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
         if self.flash:
-            if self.config.TK_kernel:
-                y     = self.y
-                l_vec = self.l_vec
-
-                # pad during inference
-                is_padding = False
-                if q.size(2) % 768 != 0:
-                    original_t = q.size(2)
-                    pad = 768 - (q.size(2) % 768)
-                    q = F.pad(q, (0, 0, 0, pad))
-                    k = F.pad(k, (0, 0, 0, pad))
-                    v = F.pad(v, (0, 0, 0, pad))
-                    is_padding = True
-                    
-                    y     = torch.zeros_like(q)
-                    l_vec = torch.zeros((y.size(0), y.size(1), y.size(2), 1), device='cuda', dtype=torch.float32)
-
-                # call tk kernel
-                tk.mha_forward(q, k, v, y, l_vec, True)
-                
-                # undo the padding
-                if is_padding: 
-                    y = y[:, :, :original_t, :]
-            else:
-                # efficient attention using Flash Attention CUDA kernels
-                y = torch.nn.functional.scaled_dot_product_attention(
-                    q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True
-                )
-                
+            y = torch.nn.functional.scaled_dot_product_attention(
+                q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True
+            )    
         else:
             # manual implementation of attention
             att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
