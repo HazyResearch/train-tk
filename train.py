@@ -170,68 +170,97 @@ X, Y = get_batch('train')
 t0 = time.time()
 running_mfu = -1.0
 
+
+# prof_warmup_iters = 10
+# prof_num_iters = 5
+# prof_num_profile_repeat = 2
+# with torch.profiler.profile(
+#     activities=[
+#         torch.profiler.ProfilerActivity.CPU,
+#         torch.profiler.ProfilerActivity.CUDA,
+#     ],
+#     schedule=torch.profiler.schedule(
+#         wait=1,
+#         warmup=prof_warmup_iters,
+#         active=prof_num_iters,
+#         repeat=prof_num_profile_repeat,
+#     ),
+#     record_shapes=True,
+#     profile_memory=True,
+#     with_stack=True,
+# )  as prof:
+#     for _ in range(
+#         prof_num_profile_repeat * (prof_num_iters + prof_warmup_iters + 1)
+#     ):
+       
+        
+
 while True:
-    # determine and set the learning rate for this iteration
-    lr = get_lr(iter_num) if decay_lr else learning_rate
-    for param_group in optimizer.param_groups:
-        param_group['lr'] = lr
+        # determine and set the learning rate for this iteration
+        lr = get_lr(iter_num) if decay_lr else learning_rate
+        for param_group in optimizer.param_groups:
+            param_group['lr'] = lr
 
-    # evaluate the loss on train/val sets and write checkpoints
-    if iter_num % eval_interval == 0 and master_process:
-        losses = estimate_loss()
-        print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
-        if wandb_log:
-            wandb.log({
-                "iter": iter_num,
-                "train/loss": losses['train'],
-                "val/loss": losses['val'],
-                "lr": lr,
-                "mfu": running_mfu*100, # convert to percentage
-            })
-        if losses['val'] < best_val_loss or always_save_checkpoint:
-            best_val_loss = losses['val']
-            if iter_num > 0:
-                checkpoint = {
-                    'model': model.state_dict(),
-                    'optimizer': optimizer.state_dict(),
-                    'model_args': model_args,
-                    'iter_num': iter_num,
-                    'best_val_loss': best_val_loss,
-                    'config': config,
-                }
-                print(f"saving checkpoint to {out_dir}")
-                torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
-    
-    if iter_num == 0 and eval_only:
-        break
+        # evaluate the loss on train/val sets and write checkpoints
+        if iter_num % eval_interval == 0 and master_process:
+            losses = estimate_loss()
+            print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+            if wandb_log:
+                wandb.log({
+                    "iter": iter_num,
+                    "train/loss": losses['train'],
+                    "val/loss": losses['val'],
+                    "lr": lr,
+                    "mfu": running_mfu*100, # convert to percentage
+                })
+            if losses['val'] < best_val_loss or always_save_checkpoint:
+                best_val_loss = losses['val']
+                if iter_num > 0:
+                    checkpoint = {
+                        'model': model.state_dict(),
+                        'optimizer': optimizer.state_dict(),
+                        'model_args': model_args,
+                        'iter_num': iter_num,
+                        'best_val_loss': best_val_loss,
+                        'config': config,
+                    }
+                    print(f"saving checkpoint to {out_dir}")
+                    torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
+        
+        if iter_num == 0 and eval_only:
+            break
 
-    # forward backward update, with optional gradient accumulation to simulate larger batch size
-    for micro_step in range(gradient_accumulation_steps):
-        logits, loss = model(X, Y)
-        loss = loss / gradient_accumulation_steps # scale the loss to account for gradient accumulation
-        X, Y = get_batch('train')
-        loss.backward()
+        # forward backward update, with optional gradient accumulation to simulate larger batch size
+        for micro_step in range(gradient_accumulation_steps):
+            logits, loss = model(X, Y)
+            loss = loss / gradient_accumulation_steps # scale the loss to account for gradient accumulation
+            X, Y = get_batch('train')
+            loss.backward()
 
-    # clip the gradient
-    if grad_clip != 0.0:
-        torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
-    optimizer.step()
-    optimizer.zero_grad(set_to_none=True)
+        # clip the gradient
+        if grad_clip != 0.0:
+            torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+        optimizer.step()
+        optimizer.zero_grad(set_to_none=True)
 
-    # timing and logging
-    t1 = time.time()
-    dt = t1 - t0
-    t0 = t1
-    if iter_num % log_interval == 0 and master_process:
-        # get loss as float. note: this is a CPU-GPU sync point
-        # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
-        lossf = loss.item() * gradient_accumulation_steps
-        if iter_num >= 5: # let the training loop settle a bit
-            mfu = model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
-            running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
-    iter_num += 1
+        # timing and logging
+        t1 = time.time()
+        dt = t1 - t0
+        t0 = t1
+        if iter_num % log_interval == 0 and master_process:
+            # get loss as float. note: this is a CPU-GPU sync point
+            # scale up to undo the division above, approximating the true total loss (exact would be a sum)
+            lossf = loss.item() * gradient_accumulation_steps
+            if iter_num >= 5: # let the training loop settle a bit
+                mfu = model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
+                running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
+            print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        iter_num += 1
 
-    # termination conditions
-    if iter_num > max_iters:
-        break
+        # termination conditions
+        if iter_num > max_iters:
+            break
+
+#     prof.step()
+# prof.export_chrome_trace(f"profs_nano_gpt.json")
+
