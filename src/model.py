@@ -43,6 +43,9 @@ class CausalSelfAttention(nn.Module):
         self.n_head = config.n_head
         self.n_embd = config.n_embd
         self.dropout = config.dropout
+        self.is_causal = config.causal
+
+        print(f"Using Reference CausalSelfAttention -- Causal = {self.is_causal}")
         
         # flash attention make GPU go brrrrr but support is only in PyTorch >= 2.0
         self.flash = hasattr(torch.nn.functional, 'scaled_dot_product_attention')
@@ -51,15 +54,6 @@ class CausalSelfAttention(nn.Module):
             # causal mask to ensure that attention is only applied to the left in the input sequence
             self.register_buffer("bias", torch.tril(torch.ones(config.block_size, config.block_size))
                                         .view(1, 1, config.block_size, config.block_size))
-
-        if self.config.TK_kernel:
-            # B, H, N, D
-            self.y = torch.zeros(config.batch_size, config.n_head, config.block_size, config.n_embd // config.n_head, device='cuda', dtype=torch.bfloat16)
-            self.y = self.y.contiguous()
-            
-            # B, H, N, 1
-            self.l_vec = torch.zeros(config.batch_size, config.n_head, config.block_size, 1, device='cuda', dtype=torch.float32)
-            self.l_vec = self.l_vec.contiguous()
 
     def forward(self, x):
         B, T, C = x.size() # batch size, sequence length, embedding dimensionality (n_embd)
@@ -73,12 +67,13 @@ class CausalSelfAttention(nn.Module):
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
         if self.flash:
             y = torch.nn.functional.scaled_dot_product_attention(
-                q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True
+                q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=self.is_causal
             )    
         else:
             # manual implementation of attention
             att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
-            att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
+            if self.is_causal:
+                att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
             att = F.softmax(att, dim=-1)
             att = self.attn_dropout(att)
             y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
@@ -109,7 +104,7 @@ class Block(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.ln_1 = LayerNorm(config.n_embd, bias=config.bias)
-
+        
         print("TK_kernel: ", config.TK_kernel)
         if config.TK_kernel and config.is_train: 
             self.attn = CustomAttention(config)
@@ -206,12 +201,13 @@ class GPT(nn.Module):
         if targets is not None:
             # if we are given some desired targets also calculate the loss
             logits = self.lm_head(x)
-            loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
+            loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-100)
         else:
             # inference-time mini-optimization: only forward the lm_head on the very last position
             logits = self.lm_head(x[:, [-1], :]) # note: using list [-1] to preserve the time dim
             loss = None
 
+        # breakpoint()
         return logits, loss
 
     def crop_block_size(self, block_size):

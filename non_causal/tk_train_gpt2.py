@@ -4,10 +4,12 @@
 
 wandb_log = True
 wandb_project = 'shakespeare-char'
-wandb_run_name='1017-gpt2-124M-tk-y_ref_fwd'
+wandb_run_name='1017-gpt2-124M-tk-causalFalse'
 
-init_from = "resume" # SA: Flag
-resume_out_dir = "new_out/dup_out/2024-10-17_15-26-24/"
+# init_from = "resume" # SA: Flag
+# resume_out_dir = "new_out/dup_out/2024-10-17_15-26-24/"
+
+
 
 # these make the total batch size be ~0.5M
 # 12 batch size * 1024 block size * 5 gradaccum * 8 GPUs = 491,520
@@ -29,4 +31,4 @@ weight_decay = 1e-1
 
 
 TK_kernel = True
-causal = True
+causal = False
