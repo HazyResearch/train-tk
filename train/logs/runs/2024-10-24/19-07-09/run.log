@@ -1,5 +1,0 @@
-[2024-10-24 19:07:14,451][numexpr.utils][INFO] - Note: detected 96 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
-[2024-10-24 19:07:14,452][numexpr.utils][INFO] - Note: NumExpr detected 96 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
-[2024-10-24 19:07:14,453][numexpr.utils][INFO] - NumExpr defaulting to 16 threads.
-[2024-10-24 19:07:14,652][train.utils.utils][INFO] - Disabling python warnings! <config.ignore_warnings=True>
-[2024-10-24 19:07:14,858][lightning_lite.utilities.seed][INFO] - Global seed set to 1111
