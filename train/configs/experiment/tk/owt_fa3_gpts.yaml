@@ -12,10 +12,11 @@ train:
   optimizer:
     lr: 1.5e-4
 
-expt_name: 10-19-attn=fa3-repo=2-n=768-model=gpt2-small-pin=true-v3
+expt_name: 10-19-attn=fa3-repo=2-n=768-model=gpt2-small
 name: ${.expt_name}
 
 model:
+  _target_: tktrainer.models.gpt.GPTLMHeadModel
   config:
     mha_type: "fa3"
 

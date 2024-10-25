@@ -1,16 +1,8 @@
-# Copyright (c) 2024, Simran Arora.
-
 from einops import rearrange
 import torch
 import torch.nn as nn
 
 import thunderkittens as tk
-
-try:
-    from flash_attn.layers.rotary import RotaryEmbedding
-except ImportError:
-    RotaryEmbedding = None
-
 
 class AttentionFunction(torch.autograd.Function):
     
@@ -18,7 +10,6 @@ class AttentionFunction(torch.autograd.Function):
     def forward(ctx, q, k, v):        
         assert q.shape[3] in [64, 128], "TK train currently supports head dim 64 only"
 
-        # SA: Be careful, .contiguous() can remove requires_grad
         q = q.to(torch.bfloat16).contiguous().requires_grad_(True)
         k = k.to(torch.bfloat16).contiguous().requires_grad_(True)
         v = v.to(torch.bfloat16).contiguous().requires_grad_(True)
@@ -56,23 +47,15 @@ class MHA_TK(nn.Module):
         out_proj_bias=True,
         causal=False,
         layer_idx=None,
-        return_residual=False,
         device=None,
         dtype=None,
         **kwargs,
     ) -> None:
-        """
-        num_heads_kv: can be used to toggle MQA / GQA. If None, use num_heads.
-        return_residual: whether to return the input x along with the output. This is for
-            performance reason: for post-norm architecture, returning the input allows us
-            to fuse the backward of nn.Linear with the residual connection.
-        """
         factory_kwargs = {"device": device, "dtype": dtype}
         super().__init__()
         self.embed_dim = embed_dim
         self.causal = causal
         self.layer_idx = layer_idx
-        self.return_residual = return_residual
   
         self.num_heads = num_heads
         self.num_heads_kv =  num_heads
@@ -82,6 +65,7 @@ class MHA_TK(nn.Module):
         self.k_proj = nn.Linear(embed_dim, embed_dim, bias=qkv_proj_bias, **factory_kwargs)
         self.v_proj = nn.Linear(embed_dim, embed_dim, bias=qkv_proj_bias, **factory_kwargs)
         self.out_proj = nn.Linear(embed_dim, embed_dim, bias=out_proj_bias, **factory_kwargs)
+
 
     def forward(
         self,
@@ -99,5 +83,4 @@ class MHA_TK(nn.Module):
         o = AttentionFunction.apply(q, k, v)
         context = o.transpose(1, 2).contiguous()
         out = self.out_proj(rearrange(context, "... h d -> ... (h d)"))
-        return out if not self.return_residual else (out, x)
-
+        return out

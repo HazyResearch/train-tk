@@ -139,6 +139,43 @@ def get_batch(split):
         x, y = x.to(device), y.to(device)
     return x, y
 
+
+############### START NON CAUSAL DATA LOADER ################
+
+# poor man's BERT data loader
+def get_batch_bert(split):
+    # We recreate np.memmap every batch to avoid a memory leak, as per
+    # https://stackoverflow.com/questions/45132940/numpy-memmap-memory-usage-want-to-iterate-once/61472122#61472122
+    if split == 'train':
+        data = np.memmap(os.path.join(data_dir, 'train.bin'), dtype=np.uint16, mode='r')
+    else:
+        data = np.memmap(os.path.join(data_dir, 'val.bin'), dtype=np.uint16, mode='r')
+    ix = torch.randint(len(data) - block_size, (batch_size,))
+    x = torch.stack([torch.from_numpy((data[i:i+block_size]).astype(np.int64)) for i in ix])
+    y = torch.stack([torch.from_numpy((data[i+1:i+1+block_size]).astype(np.int64)) for i in ix])
+    if device_type == 'cuda':
+        # pin arrays x,y, which allows us to move them to GPU asynchronously (non_blocking=True)
+        x, y = x.pin_memory().to(device, non_blocking=True), y.pin_memory().to(device, non_blocking=True)
+    else:
+        x, y = x.to(device), y.to(device)
+
+    # set the outputs to be the same as inputs and have -100 where we will predict
+    # randomly mask 15% of the tokens
+    mask = torch.rand(x.shape).to(device) < 0.15
+    x_bert = x.clone()
+    x_bert[mask] = 50256 # mask token is the last in the vocab
+    y_bert = x.clone()
+    y_bert[~mask] = -100 # -100 is ignored in the loss
+
+    return x_bert, y_bert
+
+if not causal:
+    get_batch = get_batch_bert
+    print(f"Non causal BERT dataloader!")
+
+############### END NON CAUSAL DATA LOADER ################
+
+
 # init these up here, can override if init_from='resume' (i.e. from a checkpoint)
 iter_num = 0
 best_val_loss = 1e9

@@ -1,5 +1,3 @@
-# Copyright (c) 2023, Tri Dao.
-
 import math
 from functools import partial
 from typing import Tuple
@@ -67,11 +65,8 @@ class FlashSelfAttention(nn.Module):
         """
         assert qkv.dtype in [torch.float16, torch.bfloat16]
         assert qkv.is_cuda
-        # Inputs are B, N, H, D
         q, k, v = qkv.unbind(dim=2)
-        breakpoint()
         y, _ = flash_attn_func(q, k, v, causal=True)
-        print(f"{y.requires_grad}") 
         return y
 
 
@@ -217,7 +212,6 @@ class MHA_FA3(nn.Module):
                 or not self.use_flash_attn
             ):
                 if self.rotary_emb_dim > 0:
-                    breakpoint()
                     qkv = self.rotary_emb(
                         qkv, seqlen_offset=seqlen_offset, max_seqlen=rotary_max_seqlen
                     )

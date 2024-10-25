@@ -7,19 +7,21 @@ import os
 
 
 class AttentionFunction(Function):
-    def forward(ctx, q, k, v):        
+    def forward(ctx, q, k, v, is_causal):        
         
         q = q.to(torch.bfloat16).contiguous()
         k = k.to(torch.bfloat16).contiguous()
         v = v.to(torch.bfloat16).contiguous()
 
-        o, l_vec = tk.mha_forward(q, k, v, True) 
+        o, l_vec = tk.mha_forward(q, k, v, is_causal) 
 
         ctx.save_for_backward(q, k, v, o, l_vec)
+        ctx.is_causal = is_causal
         return o.to(torch.float32)
 
     def backward(ctx, grad_o):        
         q, k, v, o, l_vec = ctx.saved_tensors
+        is_causal = ctx.is_causal
 
         l_vec = l_vec.contiguous()
         q = q.to(torch.bfloat16).contiguous()
@@ -31,7 +33,7 @@ class AttentionFunction(Function):
         grad_q, grad_k, grad_v = tk.mha_backward(
             q, k, v, o, 
             l_vec, 
-            grad_o, True
+            grad_o, is_causal
         )   
 
         return grad_q, grad_k, grad_v, None, None, None, None, None, None
@@ -65,12 +67,7 @@ class CustomAttention(nn.Module):
         q = q.view(B, T, self.h, C // self.h).transpose(1, 2).contiguous() # (B, nh, T, hs)
         v = v.view(B, T, self.h, C // self.h).transpose(1, 2).contiguous() # (B, nh, T, hs)
 
-        if self.is_causal:
-            attn_fn = AttentionFunction
-        else:
-            attn_fn = AttentionFunctionBERT
-
-        output = attn_fn.apply( q, k, v )
+        output = AttentionFunction.apply( q, k, v, self.is_causal )
 
         y = output.transpose(1, 2).contiguous().view(B, T, C) 
         y = self.resid_dropout(self.c_proj(y))

@@ -4,13 +4,13 @@
 
 wandb_log = True
 wandb_project = 'shakespeare-char'
-wandb_run_name='1015-tk-fwd-gpt2-124M'
+wandb_run_name='1021-model=gpt2-124M-attn=fa3' 
 
 # these make the total batch size be ~0.5M
 # 12 batch size * 1024 block size * 5 gradaccum * 8 GPUs = 491,520
-batch_size = 12
+batch_size = 8
 block_size = 768
-gradient_accumulation_steps = 8
+gradient_accumulation_steps = 64
 
 # this makes total number of tokens be 300B
 max_iters = 600000
@@ -24,6 +24,6 @@ log_interval = 10
 # weight decay
 weight_decay = 1e-1
 
+FA3_kernel = True
 TK_kernel = False
-
-TK_fwd_kernel = True
+causal = True

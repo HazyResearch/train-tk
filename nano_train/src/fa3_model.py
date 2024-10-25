@@ -44,16 +44,6 @@ class FlashAttnFunc(torch.autograd.Function):
         ctx.deterministic = deterministic
         ctx.gqa_parallel = gqa_parallel
 
-        # # HUGE FLAG! OVERRIDING!
-        # o = F.scaled_dot_product_attention(
-        #     q.permute(0, 2, 1, 3),
-        #     k.permute(0, 2, 1, 3),
-        #     v.permute(0, 2, 1, 3),
-        #     attn_mask=None,
-        #     dropout_p=0.0,
-        #     is_causal=True
-        # ).transpose(1, 2)
-
         return out
 
     @staticmethod
