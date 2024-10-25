@@ -1,0 +1,118 @@
+[[36m2024-10-24 20:44:53,510[39m][[34mtrain.training[39m][[32mINFO[39m] - Instantiating trainer <pytorch_lightning.Trainer>
+[[36m2024-10-24 20:44:53,515[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - Using 16bit native Automatic Mixed Precision (AMP)
+[[36m2024-10-24 20:44:53,516[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - Trainer already configured with model summary callbacks: [<class 'pytorch_lightning.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+[[36m2024-10-24 20:44:53,543[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - GPU available: True (cuda), used: True
+[[36m2024-10-24 20:44:53,585[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - TPU available: False, using: 0 TPU cores
+[[36m2024-10-24 20:44:53,585[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - IPU available: False, using: 0 IPUs
+[[36m2024-10-24 20:44:53,586[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - HPU available: False, using: 0 HPUs
+[[36m2024-10-24 20:44:53,586[39m][[34mtrain.training[39m][[32mINFO[39m] - Starting training!
+[[36m2024-10-24 20:44:53,592[39m][[34mtrain.utils.utils[39m][[32mINFO[39m] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[[36m2024-10-24 20:44:53,794[39m][[34mtrain.utils.utils[39m][[32mINFO[39m] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[[36m2024-10-24 20:44:54,017[39m][[34mtrain.callbacks.gpu_affinity[39m][[32mINFO[39m] - 0: thread affinity: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+[[36m2024-10-24 20:44:54,216[39m][[34mpytorch_lightning.accelerators.cuda[39m][[32mINFO[39m] - LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [5]
+[[36m2024-10-24 20:44:54,221[39m][[34mtrain.tasks.seq[39m][[32mINFO[39m] - Optimizer group 0: 0 tensors, 0 parameters, {'weight_decay': 0.1, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+[[36m2024-10-24 20:44:54,221[39m][[34mtrain.tasks.seq[39m][[32mINFO[39m] - Optimizer group 1: 100 tensors, 39308544 parameters, {'weight_decay': 0.0, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+[[36m2024-10-24 20:44:54,223[39m][[34mtrain.tasks.seq[39m][[32mINFO[39m] - Optimizer group 2: 48 tensors, 84934656 parameters, {'lr_multiplier': 1.0, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'weight_decay': 0.1, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+┏━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃[1m   [22m┃[1m Name          [22m┃[1m Type             [22m┃[1m Params [22m┃
+┡━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ 0 │ model         │ GPTLMHeadModel   │  124 M │
+│ 1 │ loss_fn       │ CrossEntropyLoss │      0 │
+│ 2 │ loss_fn_val   │ CrossEntropyLoss │      0 │
+│ 3 │ train_metrics │ MetricCollection │      0 │
+│ 4 │ val_metrics   │ MetricCollection │      0 │
+│ 5 │ test_metrics  │ MetricCollection │      0 │
+└───┴───────────────┴──────────────────┴────────┘
+[1mTrainable params[22m: 124 M
+[1mNon-trainable params[22m: 0
+[1mTotal params[22m: 124 M
+[1mTotal estimated model params size (MB)[22m: 248
+Sanity Checking DataLoader 0:   0%|                                                      | 0/2 [00:00<?, ?it/s]
+Error executing job with overrides: ['experiment=tk/owt_tk_gpts', 'trainer.devices=1']
+Traceback (most recent call last):
+  File "/home/rahul/simran/based/train/run.py", line 69, in <module>
+    main()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/run.py", line 63, in main
+    return train(config)
+           ^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/training.py", line 187, in train
+    trainer.fit(model=model, datamodule=datamodule, **ckpt_cfg)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 603, in fit
+    call._call_and_handle_interrupt(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 645, in _fit_impl
+    self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1098, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1177, in _run_stage
+    self._run_train()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1190, in _run_train
+    self._run_sanity_check()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1262, in _run_sanity_check
+    val_loop.run()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 152, in advance
+    dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 137, in advance
+    output = self._evaluation_step(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 234, in _evaluation_step
+    output = self.trainer._call_strategy_hook(hook_name, *kwargs.values())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1480, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 390, in validation_step
+    return self.model.validation_step(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/tasks/seq.py", line 129, in validation_step
+    return self.shared_step(batch, batch_idx, phase='val')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/tasks/seq.py", line 191, in shared_step
+    loss, output, targets = self.step(batch, is_train=(phase == 'train'))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/tasks/seq.py", line 184, in step
+    output = self.forward(x).logits
+             ^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/tasks/seq.py", line 99, in forward
+    return self.model(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/flash_attn/models/gpt.py", line 665, in forward
+    if isinstance(self.lm_head, ColumnParallelLinear) and inference_params is not None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: isinstance() arg 2 must be a type, a tuple of types, or a union

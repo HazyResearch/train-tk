@@ -1,0 +1,45 @@
+
+# @package _global_
+defaults:
+  - /experiment/owt/base.yaml
+  - override /model: gpt2
+  - override /model/gpt2model: gpt2-small
+
+datamodule:
+  batch_size: 12  # Per GPU
+
+train:
+  gpu_mem: ${eval:"round(float(__import__('subprocess').check_output('nvidia-smi -i 0 --query-gpu=memory.total --format=csv,noheader,nounits', shell=True).strip().decode()) / 1000)"}
+  global_batch_size: 96
+  optimizer:
+    lr: 6e-4
+    weight_decay: 0.1
+    betas: [0.9, 0.95]
+  optimizer_param_grouping:
+    bias_weight_decay: False
+    normalization_weight_decay: False
+  scheduler:
+    num_warmup_steps: 2000
+    num_training_steps: 600000
+    _target_: transformers.get_cosine_schedule_with_warmup
+  loss_fn:
+    _target_: flash_attn.losses.cross_entropy.CrossEntropyLoss
+    inplace_backward: True  # to save memory
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  num_nodes: 1
+  accumulate_grad_batches: 8
+  max_steps: 600000
+  val_check_interval: 1000
+  check_val_every_n_epoch: null  
+  precision: 16
+  gradient_clip_val: 1.0
+  strategy: null
+
+expt_name: 10-21-gpt2s-attn=fa2-hparams=nano-rep=1
+name: ${.expt_name}
+
+
+

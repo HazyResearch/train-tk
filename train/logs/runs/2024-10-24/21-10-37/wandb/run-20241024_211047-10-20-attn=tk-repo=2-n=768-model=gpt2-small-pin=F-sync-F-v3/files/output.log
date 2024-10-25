@@ -1,0 +1,115 @@
+[[36m2024-10-24 21:10:47,619[39m][[34mtrain.training[39m][[32mINFO[39m] - Instantiating trainer <pytorch_lightning.Trainer>
+[[36m2024-10-24 21:10:47,624[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - Using 16bit native Automatic Mixed Precision (AMP)
+[[36m2024-10-24 21:10:47,625[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - Trainer already configured with model summary callbacks: [<class 'pytorch_lightning.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+[[36m2024-10-24 21:10:47,651[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - GPU available: True (cuda), used: True
+[[36m2024-10-24 21:10:47,697[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - TPU available: False, using: 0 TPU cores
+[[36m2024-10-24 21:10:47,697[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - IPU available: False, using: 0 IPUs
+[[36m2024-10-24 21:10:47,698[39m][[34mpytorch_lightning.utilities.rank_zero[39m][[32mINFO[39m] - HPU available: False, using: 0 HPUs
+[[36m2024-10-24 21:10:47,699[39m][[34mtrain.training[39m][[32mINFO[39m] - Starting training!
+[[36m2024-10-24 21:10:47,705[39m][[34mtrain.utils.utils[39m][[32mINFO[39m] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[[36m2024-10-24 21:10:47,891[39m][[34mtrain.utils.utils[39m][[32mINFO[39m] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[[36m2024-10-24 21:10:48,078[39m][[34mtrain.callbacks.gpu_affinity[39m][[32mINFO[39m] - 0: thread affinity: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+[[36m2024-10-24 21:10:48,401[39m][[34mpytorch_lightning.accelerators.cuda[39m][[32mINFO[39m] - LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [5]
+[[36m2024-10-24 21:10:48,407[39m][[34mtrain.tasks.seq[39m][[32mINFO[39m] - Optimizer group 0: 48 tensors, 84934656 parameters, {'weight_decay': 0.1, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+[[36m2024-10-24 21:10:48,407[39m][[34mtrain.tasks.seq[39m][[32mINFO[39m] - Optimizer group 1: 100 tensors, 39320832 parameters, {'weight_decay': 0.0, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+┏━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃[1m   [22m┃[1m Name          [22m┃[1m Type             [22m┃[1m Params [22m┃
+┡━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ 0 │ model         │ GPTLMHeadModel   │  124 M │
+│ 1 │ loss_fn       │ CrossEntropyLoss │      0 │
+│ 2 │ loss_fn_val   │ CrossEntropyLoss │      0 │
+│ 3 │ train_metrics │ MetricCollection │      0 │
+│ 4 │ val_metrics   │ MetricCollection │      0 │
+│ 5 │ test_metrics  │ MetricCollection │      0 │
+└───┴───────────────┴──────────────────┴────────┘
+[1mTrainable params[22m: 124 M
+[1mNon-trainable params[22m: 0
+[1mTotal params[22m: 124 M
+[1mTotal estimated model params size (MB)[22m: 248
+
+
+Epoch 0:   0%| | 42/1486497 [00:02<29:21:08, 14.07it/s, loss=11, v_num=F-v3, train/num-tokens_step=251904, trai
+Traceback (most recent call last):
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 645, in _fit_impl
+    self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1098, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1177, in _run_stage
+    self._run_train()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1200, in _run_train
+    self.fit_loop.run()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 267, in advance
+    self._outputs = self.epoch_loop.run(self._data_fetcher)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 230, in advance
+    self.trainer._call_callback_hooks("on_train_batch_end", batch_end_outputs, batch, batch_idx)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1380, in _call_callback_hooks
+    fn(self, self.lightning_module, *args, **kwargs)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/callbacks/progress/tqdm_progress.py", line 264, in on_train_batch_end
+    self.main_progress_bar.set_postfix(self.get_metrics(trainer, pl_module))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/callbacks/progress/base.py", line 245, in get_metrics
+    standard_metrics = get_standard_metrics(trainer, pl_module)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/callbacks/progress/base.py", line 274, in get_standard_metrics
+    avg_training_loss = running_train_loss.cpu().item()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/rahul/simran/based/train/run.py", line 69, in <module>
+    main()
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          ^^^^^^^^
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/run.py", line 63, in main
+    return train(config)
+           ^^^^^^^^^^^^^
+  File "/home/rahul/simran/based/train/training.py", line 187, in train
+    trainer.fit(model=model, datamodule=datamodule, **ckpt_cfg)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 603, in fit
+    call._call_and_handle_interrupt(
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 52, in _call_and_handle_interrupt
+    trainer._call_callback_hooks("on_exception", exception)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1380, in _call_callback_hooks
+    fn(self, self.lightning_module, *args, **kwargs)
+  File "/home/rahul/simran/based/train/callbacks/model_checkpoint.py", line 17, in on_exception
+    trainer.save_checkpoint(str(Path(self.dirpath) / '.pl_auto_save.ckpt'))
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1941, in save_checkpoint
+    self._checkpoint_connector.save_checkpoint(filepath, weights_only=weights_only, storage_options=storage_options)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/checkpoint_connector.py", line 540, in save_checkpoint
+    self.trainer.strategy.save_checkpoint(_checkpoint, filepath, storage_options=storage_options)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 466, in save_checkpoint
+    self.checkpoint_io.save_checkpoint(checkpoint, filepath, storage_options=storage_options)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/lightning_lite/plugins/io/torch_io.py", line 54, in save_checkpoint
+    _atomic_save(checkpoint, path)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/lightning_lite/utilities/cloud_io.py", line 67, in _atomic_save
+    torch.save(checkpoint, bytesbuffer)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/torch/serialization.py", line 652, in save
+    _save(obj, opened_zipfile, pickle_module, pickle_protocol, _disable_byteorder_record)
+  File "/home/rahul/code/.venv/lib/python3.12/site-packages/torch/serialization.py", line 886, in _save
+    zip_file.write_record(name, storage, num_bytes)
+KeyboardInterrupt

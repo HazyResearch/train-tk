@@ -1,0 +1,139 @@
+work_dir: ${hydra:runtime.cwd}
+data_dir: ${work_dir}/data/
+print_config: true
+ignore_warnings: true
+test_after_training: true
+resume: false
+seed: 1111
+name: ${.expt_name}
+trainer:
+  _target_: pytorch_lightning.Trainer
+  accelerator: gpu
+  min_epochs: 1
+  max_epochs: 1000
+  devices: 1
+  num_nodes: 1
+  accumulate_grad_batches: ${div_up:${train.global_batch_size}, ${eval:${trainer.devices}
+    * ${datamodule.batch_size} * ${trainer.num_nodes}}}
+  max_steps: 400000
+  val_check_interval: ${eval:1000 * ${.accumulate_grad_batches}}
+  check_val_every_n_epoch: null
+  precision: 16
+  gradient_clip_val: 1.0
+  strategy: null
+train:
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 0.00015
+    weight_decay: 0.1
+  scheduler:
+    _target_: transformers.get_linear_schedule_with_warmup
+    num_warmup_steps: ${eval:0.01 * ${trainer.max_steps}}
+    num_training_steps: ${trainer.max_steps}
+  gpu_mem: ${eval:"round(float(__import__('subprocess').check_output('nvidia-smi -i
+    0 --query-gpu=memory.total --format=csv,noheader,nounits', shell=True).strip().decode())
+    / 1000)"}
+  global_batch_size: 512
+  optimizer_param_grouping:
+    bias_weight_decay: false
+    normalization_weight_decay: false
+  loss_fn:
+    _target_: flash_attn.losses.cross_entropy.CrossEntropyLoss
+    inplace_backward: true
+task:
+  _target_: train.tasks.seq.SequenceLMModel
+model:
+  _target_: flash_attn.models.gpt.GPTLMHeadModel
+  _recursive_: true
+  config:
+    _target_: tktrainer.transformers.GPT2Config
+    reorder_and_upcast_attn: false
+    scale_attn_by_inverse_layer_idx: true
+    n_positions: ${datamodule.max_length}
+    n_embd: 768
+    n_head: 12
+    n_layer: 12
+    mha_type: tk
+datamodule:
+  _target_: train.datamodules.language_modeling_hf.LMDataModule
+  dataset_name: openwebtext
+  dataset_config_name: null
+  tokenizer_name: gpt2
+  cache_dir: /scratch/openwebtext/cache
+  max_length: 768
+  val_ratio: 0.0005
+  val_split_seed: 2357
+  add_eos: true
+  batch_size: 8
+  batch_size_eval: ${.batch_size}
+  num_workers: 32
+  shuffle: true
+  pin_memory: true
+  __train_len: ${div_up:9035582198, ${.max_length}}
+  fault_tolerant: true
+  ddp: ${eval:"${trainer.devices} > 1"}
+callbacks:
+  rich_model_summary:
+    _target_: pytorch_lightning.callbacks.RichModelSummary
+  model_checkpoint:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    monitor: val/loss
+    mode: min
+    save_top_k: 1
+    save_last: true
+    verbose: false
+    dirpath: ${work_dir}/checkpoints/${oc.select:name,''}
+    filename: step_{step}
+    auto_insert_metric_name: false
+    every_n_train_steps: 1000
+  early_stopping: null
+  learning_rate_monitor:
+    _target_: pytorch_lightning.callbacks.LearningRateMonitor
+    logging_interval: step
+  speed_monitor:
+    _target_: train.callbacks.speed_monitor.SpeedMonitor
+    intra_step_time: true
+    inter_step_time: true
+    epoch_time: true
+  loss_scale_monitor:
+    _target_: train.callbacks.loss_scale_monitor.LossScaleMonitor
+  params_log:
+    _target_: train.callbacks.params_log.ParamsLog
+    total_params_log: true
+    trainable_params_log: true
+    non_trainable_params_log: true
+  gpu_affinity:
+    _target_: train.callbacks.gpu_affinity.GpuAffinity
+  norm_monitor:
+    _target_: train.callbacks.norm_monitor.NormMonitor
+  model_checkpoint_progress:
+    _target_: train.callbacks.model_checkpoint.ModelCheckpointMine
+    fault_tolerant: true
+    every_n_train_steps: 50000
+    save_last: false
+    save_top_k: -1
+    dirpath: ${..model_checkpoint.dirpath}
+    filename: progress_step_{step}
+    auto_insert_metric_name: false
+eval:
+  metrics:
+    ppl:
+      _target_: train.metrics.perplexity.Perplexity
+    num-tokens:
+      _target_: train.metrics.num_tokens.NumTokens
+  log_on_step: true
+logger:
+  wandb:
+    _target_: pytorch_lightning.loggers.wandb.WandbLogger
+    project: based
+    name: ${name}
+    save_dir: .
+    mode: online
+    id: ${oc.select:name}
+    log_model: false
+    prefix: ''
+    job_type: train
+    group: ''
+    tags: []
+default_mode: true
+expt_name: 10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3

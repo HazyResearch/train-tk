@@ -1,0 +1,33 @@
+[2024-10-24 21:30:04,194][numexpr.utils][INFO] - Note: detected 96 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2024-10-24 21:30:04,194][numexpr.utils][INFO] - Note: NumExpr detected 96 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+[2024-10-24 21:30:04,195][numexpr.utils][INFO] - NumExpr defaulting to 16 threads.
+[2024-10-24 21:30:04,365][train.utils.utils][INFO] - Disabling python warnings! <config.ignore_warnings=True>
+[2024-10-24 21:30:04,401][lightning_lite.utilities.seed][INFO] - Global seed set to 1111
+[2024-10-24 21:30:04,426][train.tasks.seq][INFO] - Instantiating datamodule <train.datamodules.language_modeling_hf.LMDataModule>
+[2024-10-24 21:30:04,615][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 21:30:04,706][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 21:30:04,785][train.tasks.seq][INFO] - Instantiating model <tktrainer.models.gpt.GPTLMHeadModel>
+[2024-10-24 21:30:07,384][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.RichModelSummary>
+[2024-10-24 21:30:07,385][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2024-10-24 21:30:07,387][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.LearningRateMonitor>
+[2024-10-24 21:30:07,388][train.training][INFO] - Instantiating callback <train.callbacks.speed_monitor.SpeedMonitor>
+[2024-10-24 21:30:07,391][train.training][INFO] - Instantiating callback <train.callbacks.loss_scale_monitor.LossScaleMonitor>
+[2024-10-24 21:30:07,392][train.training][INFO] - Instantiating callback <train.callbacks.params_log.ParamsLog>
+[2024-10-24 21:30:07,393][train.training][INFO] - Instantiating callback <train.callbacks.gpu_affinity.GpuAffinity>
+[2024-10-24 21:30:07,394][train.training][INFO] - Instantiating callback <train.callbacks.norm_monitor.NormMonitor>
+[2024-10-24 21:30:07,395][train.training][INFO] - Instantiating callback <train.callbacks.model_checkpoint.ModelCheckpointMine>
+[2024-10-24 21:30:07,397][train.training][INFO] - Instantiating logger <pytorch_lightning.loggers.wandb.WandbLogger>
+[2024-10-24 21:30:08,710][train.training][INFO] - Instantiating trainer <pytorch_lightning.Trainer>
+[2024-10-24 21:30:08,715][pytorch_lightning.utilities.rank_zero][INFO] - Using 16bit native Automatic Mixed Precision (AMP)
+[2024-10-24 21:30:08,717][pytorch_lightning.utilities.rank_zero][INFO] - Trainer already configured with model summary callbacks: [<class 'pytorch_lightning.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+[2024-10-24 21:30:08,743][pytorch_lightning.utilities.rank_zero][INFO] - GPU available: True (cuda), used: True
+[2024-10-24 21:30:08,788][pytorch_lightning.utilities.rank_zero][INFO] - TPU available: False, using: 0 TPU cores
+[2024-10-24 21:30:08,789][pytorch_lightning.utilities.rank_zero][INFO] - IPU available: False, using: 0 IPUs
+[2024-10-24 21:30:08,790][pytorch_lightning.utilities.rank_zero][INFO] - HPU available: False, using: 0 HPUs
+[2024-10-24 21:30:08,790][train.training][INFO] - Starting training!
+[2024-10-24 21:30:08,797][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 21:30:08,984][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 21:30:09,221][train.callbacks.gpu_affinity][INFO] - 0: thread affinity: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+[2024-10-24 21:30:09,441][pytorch_lightning.accelerators.cuda][INFO] - LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [5]
+[2024-10-24 21:30:09,448][train.tasks.seq][INFO] - Optimizer group 0: 72 tensors, 84934656 parameters, {'weight_decay': 0.1, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}
+[2024-10-24 21:30:09,449][train.tasks.seq][INFO] - Optimizer group 1: 124 tensors, 39320832 parameters, {'weight_decay': 0.0, 'lr': 0.00015, 'betas': (0.9, 0.999), 'eps': 1e-08, 'amsgrad': False, 'foreach': None, 'maximize': False, 'capturable': False, 'differentiable': False, 'fused': None}

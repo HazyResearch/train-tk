@@ -1,0 +1,9 @@
+[2024-10-24 20:45:31,974][numexpr.utils][INFO] - Note: detected 96 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2024-10-24 20:45:31,974][numexpr.utils][INFO] - Note: NumExpr detected 96 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+[2024-10-24 20:45:31,976][numexpr.utils][INFO] - NumExpr defaulting to 16 threads.
+[2024-10-24 20:45:32,148][train.utils.utils][INFO] - Disabling python warnings! <config.ignore_warnings=True>
+[2024-10-24 20:45:32,184][lightning_lite.utilities.seed][INFO] - Global seed set to 1111
+[2024-10-24 20:45:32,210][train.tasks.seq][INFO] - Instantiating datamodule <train.datamodules.language_modeling_hf.LMDataModule>
+[2024-10-24 20:45:32,406][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 20:45:32,497][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 20:45:32,576][train.tasks.seq][INFO] - Instantiating model <flash_attn.models.gpt.GPTLMHeadModel>

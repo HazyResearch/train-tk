@@ -1,0 +1,179 @@
+2024-10-24 21:10:47,260 INFO    StreamThr :2352396 [internal.py:wandb_internal():86] W&B internal server running at pid: 2352396, started at: 2024-10-24 21:10:47.258588
+2024-10-24 21:10:47,260 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: status
+2024-10-24 21:10:47,263 INFO    WriterThread:2352396 [datastore.py:open_for_write():87] open: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/run-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3.wandb
+2024-10-24 21:10:47,266 DEBUG   SenderThread:2352396 [sender.py:send():382] send: header
+2024-10-24 21:10:47,270 DEBUG   SenderThread:2352396 [sender.py:send():382] send: run
+2024-10-24 21:10:47,274 INFO    SenderThread:2352396 [sender.py:_maybe_setup_resume():763] checking resume status for None/based/10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3
+2024-10-24 21:10:47,388 INFO    SenderThread:2352396 [sender.py:_maybe_setup_resume():841] configured resuming with: ResumeState(resumed=True,step=0,history=0,events=6,output=139,runtime=46.800301,wandb_runtime=39,summary={'_wandb': {'runtime': 39}},config={'name': {'desc': None, 'value': '10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'seed': {'desc': None, 'value': 1111}, '_wandb': {'desc': None, 'value': {'m': [{'1': 'trainer/global_step', '6': [3]}], 't': {'1': [1, 9, 11, 41, 49, 50, 51, 55, 71], '2': [1, 9, 11, 41, 49, 50, 51, 55, 71], '3': [5, 7, 13, 14, 23], '4': '3.12.5', '5': '0.16.2', '6': '4.46.0', '8': [5], '13': 'linux-x86_64'}, 'code_path': 'code/train/run.py', 'framework': 'huggingface', 'start_time': 1729829156.55817, 'cli_version': '0.16.2', 'is_jupyter_run': False, 'python_version': '3.12.5', 'is_kaggle_kernel': False, 'huggingface_version': '4.46.0'}}, 'resume': {'desc': None, 'value': False}, 'data_dir': {'desc': None, 'value': '/home/rahul/simran/based/train/data/'}, 'work_dir': {'desc': None, 'value': '/home/rahul/simran/based/train'}, 'expt_name': {'desc': None, 'value': '10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'default_mode': {'desc': None, 'value': True}, 'print_config': {'desc': None, 'value': True}, 'task/_target_': {'desc': None, 'value': 'train.tasks.seq.SequenceLMModel'}, 'train/gpu_mem': {'desc': None, 'value': 82}, 'datamodule/ddp': {'desc': None, 'value': False}, 'model/_target_': {'desc': None, 'value': 'tktrainer.models.gpt.GPTLMHeadModel'}, 'ignore_warnings': {'desc': None, 'value': True}, 'logger/wandb/id': {'desc': None, 'value': '10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'trainer/devices': {'desc': None, 'value': 1}, 'eval/log_on_step': {'desc': None, 'value': True}, 'trainer/_target_': {'desc': None, 'value': 'pytorch_lightning.Trainer'}, 'trainer/strategy': {'desc': None, 'value': None}, 'logger/wandb/mode': {'desc': None, 'value': 'online'}, 'logger/wandb/name': {'desc': None, 'value': '10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'logger/wandb/tags': {'desc': None, 'value': []}, 'model/_recursive_': {'desc': None, 'value': True}, 'trainer/max_steps': {'desc': None, 'value': 400000}, 'trainer/num_nodes': {'desc': None, 'value': 1}, 'trainer/precision': {'desc': None, 'value': 16}, 'datamodule/add_eos': {'desc': None, 'value': True}, 'datamodule/shuffle': {'desc': None, 'value': True}, 'logger/wandb/group': {'desc': None, 'value': ''}, 'model/params_total': {'desc': None, 'value': 124255488}, 'train/optimizer/lr': {'desc': None, 'value': 0.00015}, 'trainer/max_epochs': {'desc': None, 'value': 1000}, 'trainer/min_epochs': {'desc': None, 'value': 1}, 'datamodule/_target_': {'desc': None, 'value': 'train.datamodules.language_modeling_hf.LMDataModule'}, 'logger/wandb/prefix': {'desc': None, 'value': ''}, 'model/config/n_embd': {'desc': None, 'value': 768}, 'model/config/n_head': {'desc': None, 'value': 12}, 'test_after_training': {'desc': None, 'value': True}, 'trainer/accelerator': {'desc': None, 'value': 'gpu'}, 'datamodule/cache_dir': {'desc': None, 'value': '/scratch/openwebtext/cache'}, 'datamodule/val_ratio': {'desc': None, 'value': 0.0005}, 'logger/wandb/project': {'desc': None, 'value': 'based'}, 'model/config/n_layer': {'desc': None, 'value': 12}, 'datamodule/batch_size': {'desc': None, 'value': 8}, 'datamodule/max_length': {'desc': None, 'value': 768}, 'datamodule/pin_memory': {'desc': None, 'value': True}, 'logger/wandb/_target_': {'desc': None, 'value': 'pytorch_lightning.loggers.wandb.WandbLogger'}, 'logger/wandb/job_type': {'desc': None, 'value': 'train'}, 'logger/wandb/save_dir': {'desc': None, 'value': '.'}, 'model/config/_target_': {'desc': None, 'value': 'transformers.GPT2Config'}, 'model/config/mha_type': {'desc': None, 'value': 'tk'}, 'datamodule/num_workers': {'desc': None, 'value': 32}, 'logger/wandb/log_model': {'desc': None, 'value': False}, 'model/params_trainable': {'desc': None, 'value': 124255488}, 'train/loss_fn/_target_': {'desc': None, 'value': 'flash_attn.losses.cross_entropy.CrossEntropyLoss'}, 'datamodule/dataset_name': {'desc': None, 'value': 'openwebtext'}, 'train/global_batch_size': {'desc': None, 'value': 512}, 'callbacks/early_stopping': {'desc': None, 'value': None}, 'model/config/n_positions': {'desc': None, 'value': 768}, 'train/optimizer/_target_': {'desc': None, 'value': 'torch.optim.AdamW'}, 'train/scheduler/_target_': {'desc': None, 'value': 'transformers.get_linear_schedule_with_warmup'}, 'datamodule/fault_tolerant': {'desc': None, 'value': True}, 'datamodule/tokenizer_name': {'desc': None, 'value': 'gpt2'}, 'datamodule/val_split_seed': {'desc': None, 'value': 2357}, 'eval/metrics/ppl/_target_': {'desc': None, 'value': 'train.metrics.perplexity.Perplexity'}, 'trainer/gradient_clip_val': {'desc': None, 'value': 1}, 'datamodule/batch_size_eval': {'desc': None, 'value': 8}, 'model/params_not_trainable': {'desc': None, 'value': 0}, 'trainer/val_check_interval': {'desc': None, 'value': 64000}, 'train/optimizer/weight_decay': {'desc': None, 'value': 0.1}, 'callbacks/params_log/_target_': {'desc': None, 'value': 'train.callbacks.params_log.ParamsLog'}, 'datamodule/dataset_config_name': {'desc': None, 'value': None}, 'train/loss_fn/inplace_backward': {'desc': None, 'value': True}, 'callbacks/gpu_affinity/_target_': {'desc': None, 'value': 'train.callbacks.gpu_affinity.GpuAffinity'}, 'callbacks/model_checkpoint/mode': {'desc': None, 'value': 'min'}, 'callbacks/norm_monitor/_target_': {'desc': None, 'value': 'train.callbacks.norm_monitor.NormMonitor'}, 'trainer/accumulate_grad_batches': {'desc': None, 'value': 64}, 'trainer/check_val_every_n_epoch': {'desc': None, 'value': None}, 'callbacks/speed_monitor/_target_': {'desc': None, 'value': 'train.callbacks.speed_monitor.SpeedMonitor'}, 'eval/metrics/num-tokens/_target_': {'desc': None, 'value': 'train.metrics.num_tokens.NumTokens'}, 'train/scheduler/num_warmup_steps': {'desc': None, 'value': 4000}, 'callbacks/model_checkpoint/dirpath': {'desc': None, 'value': '/home/rahul/simran/based/train/checkpoints/10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'callbacks/model_checkpoint/monitor': {'desc': None, 'value': 'val/loss'}, 'callbacks/model_checkpoint/verbose': {'desc': None, 'value': False}, 'callbacks/speed_monitor/epoch_time': {'desc': None, 'value': True}, 'train/scheduler/num_training_steps': {'desc': None, 'value': 400000}, 'callbacks/model_checkpoint/_target_': {'desc': None, 'value': 'pytorch_lightning.callbacks.ModelCheckpoint'}, 'callbacks/model_checkpoint/filename': {'desc': None, 'value': 'step_{step}'}, 'callbacks/model_checkpoint/save_last': {'desc': None, 'value': True}, 'model/config/reorder_and_upcast_attn': {'desc': None, 'value': False}, 'callbacks/loss_scale_monitor/_target_': {'desc': None, 'value': 'train.callbacks.loss_scale_monitor.LossScaleMonitor'}, 'callbacks/model_checkpoint/save_top_k': {'desc': None, 'value': 1}, 'callbacks/params_log/total_params_log': {'desc': None, 'value': True}, 'callbacks/rich_model_summary/_target_': {'desc': None, 'value': 'pytorch_lightning.callbacks.RichModelSummary'}, 'callbacks/speed_monitor/inter_step_time': {'desc': None, 'value': True}, 'callbacks/speed_monitor/intra_step_time': {'desc': None, 'value': True}, 'callbacks/learning_rate_monitor/_target_': {'desc': None, 'value': 'pytorch_lightning.callbacks.LearningRateMonitor'}, 'callbacks/params_log/trainable_params_log': {'desc': None, 'value': True}, 'callbacks/model_checkpoint_progress/dirpath': {'desc': None, 'value': '/home/rahul/simran/based/train/checkpoints/10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3'}, 'callbacks/model_checkpoint_progress/_target_': {'desc': None, 'value': 'train.callbacks.model_checkpoint.ModelCheckpointMine'}, 'callbacks/model_checkpoint_progress/filename': {'desc': None, 'value': 'progress_step_{step}'}, 'model/config/scale_attn_by_inverse_layer_idx': {'desc': None, 'value': True}, 'callbacks/model_checkpoint_progress/save_last': {'desc': None, 'value': False}, 'callbacks/params_log/non_trainable_params_log': {'desc': None, 'value': True}, 'callbacks/model_checkpoint/every_n_train_steps': {'desc': None, 'value': 1000}, 'callbacks/model_checkpoint_progress/save_top_k': {'desc': None, 'value': -1}, 'callbacks/learning_rate_monitor/logging_interval': {'desc': None, 'value': 'step'}, 'train/optimizer_param_grouping/bias_weight_decay': {'desc': None, 'value': False}, 'callbacks/model_checkpoint/auto_insert_metric_name': {'desc': None, 'value': False}, 'callbacks/model_checkpoint_progress/fault_tolerant': {'desc': None, 'value': True}, 'callbacks/model_checkpoint_progress/every_n_train_steps': {'desc': None, 'value': 50000}, 'train/optimizer_param_grouping/normalization_weight_decay': {'desc': None, 'value': False}, 'callbacks/model_checkpoint_progress/auto_insert_metric_name': {'desc': None, 'value': False}},tags=[])
+2024-10-24 21:10:47,498 INFO    SenderThread:2352396 [dir_watcher.py:__init__():211] watching files in: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files
+2024-10-24 21:10:47,498 INFO    SenderThread:2352396 [sender.py:_start_run_threads():1136] run started: 10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3 with start time 1729829400.459885
+2024-10-24 21:10:47,498 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: summary_record
+2024-10-24 21:10:47,501 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: check_version
+2024-10-24 21:10:47,501 INFO    SenderThread:2352396 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-10-24 21:10:47,501 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: check_version
+2024-10-24 21:10:47,563 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: run_start
+2024-10-24 21:10:47,599 DEBUG   HandlerThread:2352396 [system_info.py:__init__():27] System info init
+2024-10-24 21:10:47,599 DEBUG   HandlerThread:2352396 [system_info.py:__init__():42] System info init done
+2024-10-24 21:10:47,599 INFO    HandlerThread:2352396 [system_monitor.py:start():194] Starting system monitor
+2024-10-24 21:10:47,599 INFO    SystemMonitor:2352396 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-10-24 21:10:47,601 INFO    SystemMonitor:2352396 [interfaces.py:start():190] Started cpu monitoring
+2024-10-24 21:10:47,602 INFO    SystemMonitor:2352396 [interfaces.py:start():190] Started disk monitoring
+2024-10-24 21:10:47,603 INFO    SystemMonitor:2352396 [interfaces.py:start():190] Started gpu monitoring
+2024-10-24 21:10:47,603 INFO    SystemMonitor:2352396 [interfaces.py:start():190] Started memory monitoring
+2024-10-24 21:10:47,604 INFO    SystemMonitor:2352396 [interfaces.py:start():190] Started network monitoring
+2024-10-24 21:10:47,617 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: python_packages
+2024-10-24 21:10:47,617 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: python_packages
+2024-10-24 21:10:47,617 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: stop_status
+2024-10-24 21:10:47,619 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: internal_messages
+2024-10-24 21:10:47,621 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: stop_status
+2024-10-24 21:10:47,718 DEBUG   SenderThread:2352396 [sender.py:send():382] send: telemetry
+2024-10-24 21:10:47,718 DEBUG   SenderThread:2352396 [sender.py:send():382] send: metric
+2024-10-24 21:10:47,718 DEBUG   SenderThread:2352396 [sender.py:send():382] send: telemetry
+2024-10-24 21:10:47,719 DEBUG   SenderThread:2352396 [sender.py:send():382] send: metric
+2024-10-24 21:10:47,719 WARNING SenderThread:2352396 [sender.py:send_metric():1354] Seen metric with glob (shouldn't happen)
+2024-10-24 21:10:48,431 DEBUG   SenderThread:2352396 [sender.py:send():382] send: config
+2024-10-24 21:10:48,437 DEBUG   SenderThread:2352396 [sender.py:send():382] send: config
+2024-10-24 21:10:48,499 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_created():271] file/dir created: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/requirements.txt
+2024-10-24 21:10:48,499 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_created():271] file/dir created: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/wandb-summary.json
+2024-10-24 21:10:48,500 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_created():271] file/dir created: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:50,501 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:52,266 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: status_report
+2024-10-24 21:10:52,503 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:53,160 DEBUG   SenderThread:2352396 [sender.py:send():382] send: exit
+2024-10-24 21:10:53,160 INFO    SenderThread:2352396 [sender.py:send_exit():589] handling exit code: 255
+2024-10-24 21:10:53,160 INFO    SenderThread:2352396 [sender.py:send_exit():591] handling runtime: 44
+2024-10-24 21:10:53,164 INFO    SenderThread:2352396 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-10-24 21:10:53,164 INFO    SenderThread:2352396 [sender.py:send_exit():597] send defer
+2024-10-24 21:10:53,165 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,165 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 0
+2024-10-24 21:10:53,165 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,166 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 0
+2024-10-24 21:10:53,166 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 1
+2024-10-24 21:10:53,166 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,166 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 1
+2024-10-24 21:10:53,166 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,166 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 1
+2024-10-24 21:10:53,167 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 2
+2024-10-24 21:10:53,167 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,167 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 2
+2024-10-24 21:10:53,167 INFO    HandlerThread:2352396 [system_monitor.py:finish():203] Stopping system monitor
+2024-10-24 21:10:53,168 DEBUG   SystemMonitor:2352396 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-10-24 21:10:53,168 INFO    HandlerThread:2352396 [interfaces.py:finish():202] Joined cpu monitor
+2024-10-24 21:10:53,168 DEBUG   SystemMonitor:2352396 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-10-24 21:10:53,168 INFO    HandlerThread:2352396 [interfaces.py:finish():202] Joined disk monitor
+2024-10-24 21:10:53,169 DEBUG   SystemMonitor:2352396 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-10-24 21:10:53,503 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/wandb-summary.json
+2024-10-24 21:10:53,648 INFO    HandlerThread:2352396 [interfaces.py:finish():202] Joined gpu monitor
+2024-10-24 21:10:53,648 INFO    HandlerThread:2352396 [interfaces.py:finish():202] Joined memory monitor
+2024-10-24 21:10:53,648 INFO    HandlerThread:2352396 [interfaces.py:finish():202] Joined network monitor
+2024-10-24 21:10:53,650 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,650 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 2
+2024-10-24 21:10:53,651 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 3
+2024-10-24 21:10:53,651 DEBUG   SenderThread:2352396 [sender.py:send():382] send: stats
+2024-10-24 21:10:53,651 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,651 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 3
+2024-10-24 21:10:53,652 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,652 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 3
+2024-10-24 21:10:53,652 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 4
+2024-10-24 21:10:53,652 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,652 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 4
+2024-10-24 21:10:53,652 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,653 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 4
+2024-10-24 21:10:53,653 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 5
+2024-10-24 21:10:53,653 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,653 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 5
+2024-10-24 21:10:53,653 DEBUG   SenderThread:2352396 [sender.py:send():382] send: summary
+2024-10-24 21:10:53,655 INFO    SenderThread:2352396 [sender.py:_save_file():1403] saving file wandb-summary.json with policy end
+2024-10-24 21:10:53,656 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,656 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 5
+2024-10-24 21:10:53,656 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 6
+2024-10-24 21:10:53,656 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,656 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 6
+2024-10-24 21:10:53,656 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,656 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 6
+2024-10-24 21:10:53,658 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: status_report
+2024-10-24 21:10:53,719 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 7
+2024-10-24 21:10:53,719 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:53,719 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 7
+2024-10-24 21:10:53,720 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:53,720 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 7
+2024-10-24 21:10:54,160 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: poll_exit
+2024-10-24 21:10:54,504 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/wandb-summary.json
+2024-10-24 21:10:54,504 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/config.yaml
+2024-10-24 21:10:54,505 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:55,165 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 8
+2024-10-24 21:10:55,165 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: poll_exit
+2024-10-24 21:10:55,165 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:55,166 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 8
+2024-10-24 21:10:55,166 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:55,166 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 8
+2024-10-24 21:10:55,166 INFO    SenderThread:2352396 [job_builder.py:build():296] Attempting to build job artifact
+2024-10-24 21:10:55,166 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 9
+2024-10-24 21:10:55,167 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:55,167 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 9
+2024-10-24 21:10:55,167 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:55,167 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 9
+2024-10-24 21:10:55,167 INFO    SenderThread:2352396 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-10-24 21:10:55,504 INFO    Thread-12 :2352396 [dir_watcher.py:_on_file_modified():288] file/dir modified: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:55,504 INFO    SenderThread:2352396 [dir_watcher.py:finish():388] scan: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files
+2024-10-24 21:10:55,505 INFO    SenderThread:2352396 [dir_watcher.py:finish():402] scan save: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log output.log
+2024-10-24 21:10:55,506 INFO    SenderThread:2352396 [dir_watcher.py:finish():402] scan save: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/wandb-summary.json wandb-summary.json
+2024-10-24 21:10:55,506 INFO    SenderThread:2352396 [dir_watcher.py:finish():402] scan save: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/config.yaml config.yaml
+2024-10-24 21:10:55,507 INFO    SenderThread:2352396 [dir_watcher.py:finish():402] scan save: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/requirements.txt requirements.txt
+2024-10-24 21:10:55,508 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 10
+2024-10-24 21:10:55,509 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:55,509 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 10
+2024-10-24 21:10:55,510 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:55,511 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 10
+2024-10-24 21:10:55,512 INFO    SenderThread:2352396 [file_pusher.py:finish():175] shutting down file pusher
+2024-10-24 21:10:55,826 INFO    wandb-upload_0:2352396 [upload_job.py:push():131] Uploaded file ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/output.log
+2024-10-24 21:10:55,832 INFO    wandb-upload_2:2352396 [upload_job.py:push():131] Uploaded file ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/config.yaml
+2024-10-24 21:10:55,836 INFO    wandb-upload_1:2352396 [upload_job.py:push():131] Uploaded file ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/wandb-summary.json
+2024-10-24 21:10:55,854 INFO    wandb-upload_3:2352396 [upload_job.py:push():131] Uploaded file ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/files/requirements.txt
+2024-10-24 21:10:56,054 INFO    Thread-11 (_thread_body):2352396 [sender.py:transition_state():617] send defer: 11
+2024-10-24 21:10:56,055 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:56,056 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 11
+2024-10-24 21:10:56,057 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:56,057 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 11
+2024-10-24 21:10:56,057 INFO    SenderThread:2352396 [file_pusher.py:join():181] waiting for file pusher
+2024-10-24 21:10:56,057 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 12
+2024-10-24 21:10:56,057 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:56,057 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 12
+2024-10-24 21:10:56,057 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:56,058 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 12
+2024-10-24 21:10:56,058 INFO    SenderThread:2352396 [file_stream.py:finish():595] file stream finish called
+2024-10-24 21:10:56,120 INFO    SenderThread:2352396 [file_stream.py:finish():599] file stream finish is done
+2024-10-24 21:10:56,120 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 13
+2024-10-24 21:10:56,120 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:56,122 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 13
+2024-10-24 21:10:56,123 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:56,123 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 13
+2024-10-24 21:10:56,123 INFO    SenderThread:2352396 [sender.py:transition_state():617] send defer: 14
+2024-10-24 21:10:56,124 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: defer
+2024-10-24 21:10:56,124 INFO    HandlerThread:2352396 [handler.py:handle_request_defer():172] handle defer: 14
+2024-10-24 21:10:56,124 DEBUG   SenderThread:2352396 [sender.py:send():382] send: final
+2024-10-24 21:10:56,125 DEBUG   SenderThread:2352396 [sender.py:send():382] send: footer
+2024-10-24 21:10:56,125 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: defer
+2024-10-24 21:10:56,125 INFO    SenderThread:2352396 [sender.py:send_request_defer():613] handle sender defer: 14
+2024-10-24 21:10:56,125 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: poll_exit
+2024-10-24 21:10:56,126 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: poll_exit
+2024-10-24 21:10:56,126 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: server_info
+2024-10-24 21:10:56,126 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: get_summary
+2024-10-24 21:10:56,126 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: sampled_history
+2024-10-24 21:10:56,126 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: poll_exit
+2024-10-24 21:10:56,127 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: internal_messages
+2024-10-24 21:10:56,127 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: poll_exit
+2024-10-24 21:10:56,127 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: job_info
+2024-10-24 21:10:56,128 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: server_info
+2024-10-24 21:10:56,171 DEBUG   SenderThread:2352396 [sender.py:send_request():409] send_request: job_info
+2024-10-24 21:10:56,171 INFO    MainThread:2352396 [wandb_run.py:_footer_history_summary_info():3857] rendering history
+2024-10-24 21:10:56,173 INFO    MainThread:2352396 [wandb_run.py:_footer_history_summary_info():3889] rendering summary
+2024-10-24 21:10:56,173 INFO    MainThread:2352396 [wandb_run.py:_footer_sync_info():3816] logging synced files
+2024-10-24 21:10:56,174 DEBUG   HandlerThread:2352396 [handler.py:handle_request():146] handle_request: shutdown
+2024-10-24 21:10:56,175 INFO    HandlerThread:2352396 [handler.py:finish():869] shutting down handler
+2024-10-24 21:10:56,261 WARNING StreamThr :2352396 [internal.py:is_dead():414] Internal process exiting, parent pid 2352071 disappeared
+2024-10-24 21:10:56,261 ERROR   StreamThr :2352396 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-10-24 21:10:57,130 INFO    WriterThread:2352396 [datastore.py:close():296] close: ./wandb/run-20241024_211047-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3/run-10-20-attn=tk-repo=2-n=768-model=gpt2-small-pin=F-sync-F-v3.wandb
+2024-10-24 21:10:57,171 INFO    SenderThread:2352396 [sender.py:finish():1572] shutting down sender
+2024-10-24 21:10:57,172 INFO    SenderThread:2352396 [file_pusher.py:finish():175] shutting down file pusher
+2024-10-24 21:10:57,172 INFO    SenderThread:2352396 [file_pusher.py:join():181] waiting for file pusher

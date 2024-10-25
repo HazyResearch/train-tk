@@ -1,0 +1,31 @@
+[2024-10-24 19:15:51,146][numexpr.utils][INFO] - Note: detected 96 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2024-10-24 19:15:51,146][numexpr.utils][INFO] - Note: NumExpr detected 96 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+[2024-10-24 19:15:51,148][numexpr.utils][INFO] - NumExpr defaulting to 16 threads.
+[2024-10-24 19:15:51,343][train.utils.utils][INFO] - Disabling python warnings! <config.ignore_warnings=True>
+[2024-10-24 19:15:51,379][lightning_lite.utilities.seed][INFO] - Global seed set to 1111
+[2024-10-24 19:15:51,405][train.tasks.seq][INFO] - Instantiating datamodule <train.datamodules.language_modeling_hf.LMDataModule>
+[2024-10-24 19:56:30,001][train.utils.utils][INFO] - Saving to cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 19:56:40,992][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 19:56:41,093][train.tasks.seq][INFO] - Instantiating model <flash_attn.models.gpt.GPTLMHeadModel>
+[2024-10-24 19:56:43,996][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.RichModelSummary>
+[2024-10-24 19:56:43,997][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2024-10-24 19:56:44,001][train.training][INFO] - Instantiating callback <pytorch_lightning.callbacks.LearningRateMonitor>
+[2024-10-24 19:56:44,001][train.training][INFO] - Instantiating callback <train.callbacks.speed_monitor.SpeedMonitor>
+[2024-10-24 19:56:44,013][train.training][INFO] - Instantiating callback <train.callbacks.loss_scale_monitor.LossScaleMonitor>
+[2024-10-24 19:56:44,018][train.training][INFO] - Instantiating callback <train.callbacks.params_log.ParamsLog>
+[2024-10-24 19:56:44,024][train.training][INFO] - Instantiating callback <train.callbacks.gpu_affinity.GpuAffinity>
+[2024-10-24 19:56:44,029][train.training][INFO] - Instantiating callback <train.callbacks.norm_monitor.NormMonitor>
+[2024-10-24 19:56:44,035][train.training][INFO] - Instantiating callback <train.callbacks.model_checkpoint.ModelCheckpointMine>
+[2024-10-24 19:56:44,041][train.training][INFO] - Instantiating logger <pytorch_lightning.loggers.wandb.WandbLogger>
+[2024-10-24 19:56:46,044][train.training][INFO] - Instantiating trainer <pytorch_lightning.Trainer>
+[2024-10-24 19:56:46,049][pytorch_lightning.utilities.rank_zero][INFO] - Using 16bit native Automatic Mixed Precision (AMP)
+[2024-10-24 19:56:46,051][pytorch_lightning.utilities.rank_zero][INFO] - Trainer already configured with model summary callbacks: [<class 'pytorch_lightning.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+[2024-10-24 19:56:46,121][pytorch_lightning.utilities.rank_zero][INFO] - GPU available: True (cuda), used: True
+[2024-10-24 19:56:46,175][pytorch_lightning.utilities.rank_zero][INFO] - TPU available: False, using: 0 TPU cores
+[2024-10-24 19:56:46,175][pytorch_lightning.utilities.rank_zero][INFO] - IPU available: False, using: 0 IPUs
+[2024-10-24 19:56:46,176][pytorch_lightning.utilities.rank_zero][INFO] - HPU available: False, using: 0 HPUs
+[2024-10-24 19:56:46,177][train.training][INFO] - Starting training!
+[2024-10-24 19:56:46,184][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 19:56:46,386][train.utils.utils][INFO] - Load from cache at /scratch/openwebtext/cache/tokenizer_name-gpt2-val_ratio-0.0005-val_split_seed-2357-add_eos-True-detokenize-False
+[2024-10-24 19:56:46,588][train.callbacks.gpu_affinity][INFO] - 0: thread affinity: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+[2024-10-24 19:56:46,757][pytorch_lightning.accelerators.cuda][INFO] - LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [5]

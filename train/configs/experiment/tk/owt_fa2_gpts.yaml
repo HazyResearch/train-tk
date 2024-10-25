@@ -1,0 +1,15 @@
+# @package _global_
+defaults:
+  - /experiment/owt/base.yaml
+  - override /model: gpt2
+  - override /model/gpt2model: gpt2-small
+
+datamodule:
+  batch_size: 8  # Per GPU
+
+train:
+  optimizer:
+    lr: 1.5e-4
+
+expt_name: 10-19-attn=fa2-repo=2-n=768-model=gpt2-small
+name: ${.expt_name}

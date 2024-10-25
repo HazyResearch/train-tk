@@ -1,0 +1,2 @@
+- experiment=tk/owt_tk_gpts
+- trainer.devices=1
